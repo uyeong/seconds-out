@@ -15,6 +15,7 @@ interface Context {
   current: TimeSequence;
   next: () => void;
   reset: () => void;
+  hasNext: () => boolean;
 }
 
 interface Props extends PropsWithChildren {
@@ -30,12 +31,16 @@ const TimerSequenceProvider: FC<Props> = ({ sequence, children }) => {
   const reset = useEventCallback(() => {
     setCurrentSeqIndex(0);
   });
+  const hasNext = useEventCallback(() => {
+    return currentSeqIndex < sequence.length - 1;
+  });
   return (
     <TimerSequenceContext.Provider value={{
       sequence,
       current: sequence[currentSeqIndex],
       next,
       reset,
+      hasNext,
     }}>
       {children}
     </TimerSequenceContext.Provider>

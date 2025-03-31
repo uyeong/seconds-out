@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 
 import { useCountdownEffect } from './hooks';
 import { formatTime } from './utils';
-import { useTimerController } from './providers';
+import { useTimerController, useTimerSequence } from './providers';
 
 import css from './Timer.module.scss';
 
@@ -11,27 +11,33 @@ import type { FC } from 'react';
 
 const CIRCUMFERENCE = 2 * Math.PI * 48;
 
-interface Props {
-  seconds: number;
-  onComplete?: () => void;
-}
-
-const Timer: FC<Props> = ({ seconds: initialSeconds }) => {
+const Timer: FC = () => {
   const { playing, play, pause, stop } = useTimerController();
-  const [remaining, setRemaining] = useState(initialSeconds);
+  const { current: sequence, next, reset, hasNext } = useTimerSequence();
+  const { type, duration, round } = sequence;
+  const [seconds, setSeconds] = useState(0);
   const gaugeRef = useRef<SVGCircleElement>(null);
-  useCountdownEffect(initialSeconds, (seconds, progress) => {
-    setRemaining(initialSeconds - seconds);
+  useCountdownEffect(duration, (seconds, progress) => {
+    setSeconds(seconds);
     if (gaugeRef.current) {
       gaugeRef.current.setAttribute('stroke-dashoffset', `${progress * CIRCUMFERENCE}px`);
     }
     if (progress === 1) {
-      stop();
+      if (hasNext()) {
+        next();
+      } else {
+        stop();
+        reset();
+      }
     }
   });
   return (
     <div className={css.timer}>
       <div className={clsx(css.root, {[css.playing]: playing})}>
+        <div className={css.sequenceInfo}>
+          <span className={css.sequenceType}>{type}</span>
+          {sequence.round && <span className={css.round}>Round {round}</span>}
+        </div>
         <svg width="200" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <circle cx="50" cy="50" r="48" fill="none" stroke="#fff" strokeWidth={0.5}/>
           <circle
@@ -47,9 +53,12 @@ const Timer: FC<Props> = ({ seconds: initialSeconds }) => {
             className={css.progress}
           />
         </svg>
-        <span className={css.time}>{formatTime(remaining)}</span>
+        <span className={css.time}>{formatTime(duration - seconds)}</span>
         <div>
-          <button onClick={stop}>정지</button>
+          <button onClick={() => {
+            stop();
+            reset();
+          }}>정지</button>
           <button onClick={pause}>멈춤</button>
           <button onClick={play}>재생</button>
         </div>
@@ -57,6 +66,4 @@ const Timer: FC<Props> = ({ seconds: initialSeconds }) => {
     </div>
   ); 
 };
-
-export default Timer;
-export type { Props };
+export default Timer; 

@@ -18,7 +18,7 @@ function App() {
     <TimerSequenceProvider sequence={data}>
       <TimerControllerProvider>
         <div className={css.app}>
-          <Timer seconds={3} />
+          <Timer />
         </div>
       </TimerControllerProvider>
     </TimerSequenceProvider>
