@@ -1,15 +1,15 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useEventCallback } from '~/utils';
 
 import type { FC, PropsWithChildren } from 'react';
 
 interface Context {
+  playing: boolean;
+  paused: boolean;
+  stopped: boolean;
   play: () => void;
   pause: () => void;
   stop: () => void;
-  isPlaying: () => boolean;
-  isPaused: () => boolean;
-  isStopped: () => boolean;
 }
 
 const TimerControllerContext = createContext<Context | undefined>(undefined);
@@ -18,17 +18,13 @@ const TimerControllerProvider: FC<PropsWithChildren> = ({ children }) => {
   const play = useEventCallback(() => setState({ stopped: false, paused: false }));
   const pause = useEventCallback(() => setState(prev => ({ ...prev, paused: true })));
   const stop = useEventCallback(() => setState({ stopped: true, paused: false }));
-  const isPlaying = useCallback(() => !state.stopped && !state.paused, [ state ]);
-  const isPaused = useCallback(() => state.paused, [ state ]);
-  const isStopped = useCallback(() => state.stopped, [ state ]);
   return (
     <TimerControllerContext.Provider value={{
+      ...state,
+      playing: !state.stopped && !state.paused,
       play,
       pause,
       stop,
-      isPlaying,
-      isPaused, 
-      isStopped,
     }}>
       {children}
     </TimerControllerContext.Provider>
@@ -44,5 +40,5 @@ const useTimerController = () => {
 };
 
 export default TimerControllerProvider;
-export { useTimerController };
+export { TimerControllerContext, useTimerController };
 export type { Context };

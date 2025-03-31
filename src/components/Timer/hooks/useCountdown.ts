@@ -2,18 +2,18 @@ import { useEffect, useState, useRef, startTransition } from "react";
 import { useTimerController } from "../providers";
 
 const useCountdown = (initialSeconds: number) => {
-  const { isPaused, isStopped } = useTimerController();
+  const { paused, stopped } = useTimerController();
   const [seconds, setSeconds] = useState(initialSeconds);
   const frameRef = useRef(0);
   const pastTimeRef = useRef(0);
   useEffect(() => {
-    if (isStopped()) {
+    if (stopped) {
       window.cancelAnimationFrame(frameRef.current);
       setSeconds(initialSeconds);
       pastTimeRef.current = 0;
       return;
     }
-    if (isPaused()) {
+    if (paused) {
       window.cancelAnimationFrame(frameRef.current);
       return;
     }
@@ -40,8 +40,8 @@ const useCountdown = (initialSeconds: number) => {
     frameRef.current = requestAnimationFrame(animate);
     return () => {
       cancelAnimationFrame(frameRef.current);
-    }; 
-  }, [initialSeconds, isPaused, isStopped]); 
+    };
+  }, [initialSeconds, paused, stopped]);
   return seconds;
 }; 
 
