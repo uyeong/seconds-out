@@ -34,7 +34,7 @@ const TimerControllerProvider: FC<PropsWithChildren> = ({ children }) => {
 const useTimerController = () => {
   const context = useContext(TimerControllerContext);
   if (!context) {
-    throw new Error('useTimerState must be used within a TimerStateProvider');
+    throw new Error('useTimerController must be used within a TimerControllerProvider');
   }
   return context;
 };

@@ -1,8 +1,9 @@
-import { Timer, TimerSequenceProvider, TimerControllerProvider } from './components';
+import { ThemeProvider } from './providers';
+import Timer, { TimerSequenceProvider, TimerControllerProvider } from './components/Timer';
 
 import css from './App.module.scss';
 
-import type { TimeSequence } from './components';
+import type { TimeSequence } from './components/Timer';
 
 const data: TimeSequence[] = [
   { type: 'setup', duration: 10 },
@@ -15,13 +16,15 @@ const data: TimeSequence[] = [
 
 function App() {
   return (
-    <TimerSequenceProvider sequence={data}>
-      <TimerControllerProvider>
-        <div className={css.app}>
-          <Timer />
-        </div>
-      </TimerControllerProvider>
-    </TimerSequenceProvider>
+    <ThemeProvider defaultTheme="dark" storageKey="seconds-out-theme">
+      <div className={css.app}>
+        <TimerSequenceProvider sequence={data}>
+          <TimerControllerProvider>
+            <Timer />
+          </TimerControllerProvider>
+        </TimerSequenceProvider>
+      </div>
+    </ThemeProvider>
   )
 }
 

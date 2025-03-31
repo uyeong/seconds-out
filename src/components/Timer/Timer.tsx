@@ -1,9 +1,9 @@
-import clsx from "clsx";
 import { useRef, useState } from "react";
 
 import { useCountdownEffect } from './hooks';
 import { formatTime } from './utils';
 import { useTimerController, useTimerSequence } from './providers';
+import { Button } from '~/components/ui/button';
 
 import css from './Timer.module.scss';
 
@@ -12,7 +12,7 @@ import type { FC } from 'react';
 const CIRCUMFERENCE = 2 * Math.PI * 48;
 
 const Timer: FC = () => {
-  const { playing, play, pause, stop } = useTimerController();
+  const { play, pause, stop } = useTimerController();
   const { current: sequence, next, reset, hasNext } = useTimerSequence();
   const { type, duration, round } = sequence;
   const [seconds, setSeconds] = useState(0);
@@ -33,7 +33,7 @@ const Timer: FC = () => {
   });
   return (
     <div className={css.timer}>
-      <div className={clsx(css.root, {[css.playing]: playing})}>
+      <div className={css.root}>
         <div className={css.sequenceInfo}>
           <span className={css.sequenceType}>{type}</span>
           {sequence.round && <span className={css.round}>Round {round}</span>}
@@ -55,12 +55,12 @@ const Timer: FC = () => {
         </svg>
         <span className={css.time}>{formatTime(duration - seconds)}</span>
         <div>
-          <button onClick={() => {
+          <Button onClick={() => {
             stop();
             reset();
-          }}>정지</button>
-          <button onClick={pause}>멈춤</button>
-          <button onClick={play}>재생</button>
+          }}>정지</Button>
+          <Button onClick={pause}>멈춤</Button>
+          <Button onClick={play}>재생</Button>
         </div>
       </div>
     </div>
