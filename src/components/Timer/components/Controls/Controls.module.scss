@@ -1,0 +1,40 @@
+.inside {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  padding: 1rem 0 2rem;
+  box-sizing: content-box;
+}
+
+.button {
+  width: 3rem;
+  height: 3rem;
+  color: var(--btn-bg-color);
+  margin-right: 0.6rem;
+  font-size: 1.3rem;
+  border-radius: 999px;
+  border-color: rgb(from var(--btn-bg-color) r g b / 60%);
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  svg {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+}
+
+.play {
+  width: auto;
+  color: var(--btn-text-color);
+  background-color: var(--btn-bg-color);
+}
+
+.setting {
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}

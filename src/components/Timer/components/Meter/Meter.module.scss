@@ -1,0 +1,43 @@
+.root {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 80cqw;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  contain: strict;
+
+  svg {
+    height: 100%;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 20cqw;
+  font-weight: bold;
+  color: var(--text-color);
+  transform: translate(-50%, -50%);
+}
+
+.progress {
+  stroke: rgb(from var(--text-color) r g b / 20%);
+
+  &.setup {
+    stroke: var(--chart-setup);
+  }
+
+  &.round {
+    stroke: var(--chart-round);
+  }
+
+  &.rest {
+    stroke: var(--chart-rest);
+  }
+}

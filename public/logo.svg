@@ -1,0 +1,10 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- 벨 본체 -->
+  <circle cx="16" cy="16" r="12" fill="#D32F2F" stroke="#000" stroke-width="2"/>
+  <!-- 클래퍼 공 -->
+  <circle cx="24" cy="24" r="3" fill="#FFC107" stroke="#000" stroke-width="1"/>
+  <!-- 시침: 12시 방향 (짧게) -->
+  <line x1="16" y1="16" x2="16" y2="10" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+  <!-- 분침: 40분 방향 (약간 왼아래로, 조금 더 길게) -->
+  <line x1="16" y1="16" x2="12" y2="22" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+</svg>

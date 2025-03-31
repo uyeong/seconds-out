@@ -1,6 +1,24 @@
-.app {
+.root {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-} 
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  height: 100vh;
+  height: 100dvh;
+
+  /* 스크롤바 숨기기 (Chrome, Safari, Opera) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 각 Timer 컴포넌트를 화면에 스냅 */
+  & > div {
+    flex: 0 0 100%;
+    width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always; /* 스크롤이 항상 스냅포인트에서 멈추도록 설정 */
+    overflow: hidden;
+  }
+}
