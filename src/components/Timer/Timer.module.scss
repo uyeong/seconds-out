@@ -1,24 +1,59 @@
 .root {
-  position: relative;
-  width: 200px;
-  height: 200px;
+  margin-top: 15px;
 }
 
-.timer {
+.meter {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+  height: 225px;
+
+  svg {
+    height: 100%;
+  }
 }
 
 .time {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
-  color: #fff;
+  color: var(--primary);
+  transform: translate(-50%, -50%);
+}
+
+.progress {
+  stroke: var(--ring);
+
+  &.setup {
+    stroke: var(--chart-2)
+  }
+
+  &.round {
+    stroke: var(--chart-5);
+  }
+
+  &.rest {
+    stroke: var(--chart-2);
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  border-radius: 999px;
+  color: var(--primary);
+  margin-right: 0.5rem;
+}
+
+.play {
+  color: var(--accent);
 }
 
 .sequenceInfo {

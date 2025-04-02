@@ -13,7 +13,6 @@ const useCountdownEffect = (seconds: number, callback: (elapsed: number, progres
     if (stopped) {
       window.cancelAnimationFrame(frameIdRef.current);
       pastTimeRef.current = 0;
-      callback(0, 0);
       return;
     }
     if (paused) {
