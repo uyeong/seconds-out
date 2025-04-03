@@ -1,0 +1,43 @@
+.root {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 32vh;
+  margin-top: 2vh;
+  overflow: hidden;
+  contain: strict;
+
+  svg {
+    height: 100%;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 7vh;
+  font-weight: bold;
+  color: var(--primary);
+  transform: translate(-50%, -50%);
+}
+
+.progress {
+  stroke: var(--ring);
+
+  &.setup {
+    stroke: var(--chart-2)
+  }
+
+  &.round {
+    stroke: var(--chart-5);
+  }
+
+  &.rest {
+    stroke: var(--chart-2);
+  }
+}

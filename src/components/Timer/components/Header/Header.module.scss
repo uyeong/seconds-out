@@ -1,0 +1,18 @@
+.root {
+  display: flex;
+  justify-content: flex-end;
+  height: 6vh;
+}
+
+.setting {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  width: 6vh;
+  height: 6vh;
+
+  svg {
+    width: 1.8rem;
+    height: 1.8rem; 
+  }
+}

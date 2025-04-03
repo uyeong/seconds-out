@@ -1,0 +1,58 @@
+@function rgba-from-hex($color, $alpha) {
+  @return rgba(red($color), green($color), blue($color), $alpha);
+}
+
+.root {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 3rem;
+  padding: 2vh 0;
+  box-sizing: content-box;
+  // margin-top: -5.4rem;
+
+  // &:before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 1.2rem;
+  //   background: linear-gradient(
+  //     to bottom,
+  //     #{rgba-from-hex(#fff, 0)} 0%,
+  //     #{rgba-from-hex(#fff, 0)} 18%,
+  //     #{rgba-from-hex(#fff, 0.65)} 100%
+  //   );
+  // }
+
+  // &:after {
+  //   content: '';
+  //   position: absolute;
+  //   bottom: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 4.2rem;
+  //   background-color: #fff;
+  // }
+}
+
+.button {
+  width: 3rem;
+  height: 3rem;
+  color: var(--primary);
+  margin-right: 0.6rem;
+  font-size: 1.3rem;
+  border-radius: 999px;
+
+  svg {
+    width: 1.3rem;
+    height: 1.3rem; 
+  }
+}
+
+.play {
+  width: auto;
+  color: var(--accent);
+  margin-right: 0;
+}

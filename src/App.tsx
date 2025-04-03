@@ -1,5 +1,4 @@
 import { ThemeProvider } from './providers';
-import Header from './components/Header';
 import Timer, { TimerSequenceProvider, TimerControllerProvider } from './components/Timer';
 
 import css from './App.module.scss';
@@ -7,17 +6,24 @@ import css from './App.module.scss';
 import type { TimeSequence } from './components/Timer';
 
 const data: TimeSequence[] = [
-  { type: 'setup', duration: 3 },
-  { type: 'round', round: 1, duration: 10 },
-  { type: 'rest', round: 1, duration: 3 },
-  { type: 'round', round: 2, duration: 10 },
-]
+  { type: 'setup', duration: 1 },
+  { type: 'round', round: 1, duration: 1 },
+  { type: 'rest', round: 1, duration: 1 },
+  { type: 'round', round: 2, duration: 1 },
+  { type: 'rest', round: 2, duration: 1 },
+  { type: 'round', round: 3, duration: 1 },
+  { type: 'rest', round: 3, duration: 1 },
+  { type: 'round', round: 4, duration: 1 },
+  { type: 'rest', round: 4, duration: 1 },
+  { type: 'round', round: 5, duration: 1 },
+  { type: 'rest', round: 5, duration: 1 },
+  { type: 'round', round: 6, duration: 1 },
+];
 
 function App() {
   return (
-    <ThemeProvider storageKey="seconds-out-theme">
+    <ThemeProvider defaultTheme="light" storageKey="seconds-out-theme">
       <main className={css.root}>
-        <Header />
         <TimerSequenceProvider sequence={data}>
           <TimerControllerProvider>
             <Timer />

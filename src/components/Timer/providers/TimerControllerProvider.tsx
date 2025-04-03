@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { useEventCallback } from '~/utils';
+import { useEventCallback } from '~/hooks';
 
 import type { FC, PropsWithChildren } from 'react';
 

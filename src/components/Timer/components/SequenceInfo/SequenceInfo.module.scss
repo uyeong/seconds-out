@@ -1,8 +1,4 @@
 .root {
-  height: 100vh;
-}
-
-.sequenceInfo {
   margin-top: 2vh;
   height: calc(54vh - 3rem);
   padding-top: calc(27vh - 1.5rem);
@@ -10,11 +6,15 @@
   overflow: hidden;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
-  
+
   /* 스크롤바 숨기기 (Chrome, Safari, Opera) */
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+.mounted .item {
+  transition: transform .3s ease, opacity .3s ease;
 }
 
 .item {
@@ -23,14 +23,32 @@
   line-height: 1.2;
   color: var(--primary);
   opacity: .3;
-  transform: scale(.8);
-  // transition: transform .3s ease, opacity .3s ease;
 
   &.active {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1.2);
   }
   
+  &.distance1 {
+    opacity: 0.25;
+    transform: scale(0.7);
+  }
+  
+  &.distance2 {
+    opacity: 0.2;
+    transform: scale(0.6);
+  }
+  
+  &.distance3 {
+    opacity: 0.15;
+    transform: scale(0.5);
+  }
+  
+  &.distance4 {
+    opacity: 0.1;
+    transform: scale(0.4);
+  }
+
   span {
     display: inline-block;
     padding: .4rem .4rem .2rem .4rem;

@@ -1,14 +1,16 @@
 import { useEffect, useRef } from "react";
 import { useTimerController } from "../providers";
+import type { TimeSequence } from '../providers';
 
-const useCountdownEffect = (seconds: number, callback: (elapsed: number, progress: number) => void) => {
+const useCountdownEffect = (sequence: TimeSequence, callback: (elapsed: number, progress: number) => void) => {
   const { paused, stopped } = useTimerController();
   const frameIdRef = useRef(0);
   const pastTimeRef = useRef(0);
+  const seconds = sequence.duration;
   useEffect(() => {
     window.cancelAnimationFrame(frameIdRef.current);
     pastTimeRef.current = 0;
-  }, [seconds]);
+  }, [sequence]);
   useEffect(() => {
     if (stopped) {
       window.cancelAnimationFrame(frameIdRef.current);
