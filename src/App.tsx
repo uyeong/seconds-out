@@ -1,4 +1,5 @@
 import { ThemeProvider } from './providers';
+import Header from './components/Header';
 import Timer, { TimerSequenceProvider, TimerControllerProvider } from './components/Timer';
 
 import css from './App.module.scss';
@@ -24,6 +25,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="seconds-out-theme">
       <main className={css.root}>
+        <Header />
         <TimerSequenceProvider sequence={data}>
           <TimerControllerProvider>
             <Timer />

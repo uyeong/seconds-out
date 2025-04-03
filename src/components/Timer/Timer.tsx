@@ -50,7 +50,6 @@ const Timer: FC = () => {
   });
   return (
     <div className={css.root}>
-      <Header />
       <Meter gaugeRef={gaugeRef} seconds={currentSeconds} />
       <SequenceInfo />
       <Controls onPlay={handleClickPlay} onPause={handleClickPause} onStop={handleClickStop} />

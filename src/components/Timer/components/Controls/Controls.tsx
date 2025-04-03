@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { clsx } from 'clsx';
+import { cn } from '~/lib/utils';
 
 import { Button } from '~/components/ui/button';
 import { useEventCallback } from '~/hooks';
@@ -8,6 +8,7 @@ import { useTimerController } from '../../providers';
 import PlayIcon from './icons/Play';
 import PauseIcon from './icons/Pause';
 import StopIcon from './icons/Stop';
+import SettingIcon from './icons/Setting';
 
 import css from './Controls.module.scss';
 
@@ -38,10 +39,10 @@ const Controls: FC<Props> = ({ onPlay, onPause, onStop }) => {
           aria-label="Stop"
           onClick={onStop}
         >
-          <StopIcon />
+          <StopIcon /> 
         </Button>
         <Button
-          className={clsx(css.button, css.play)}
+          className={cn(css.button, css.play)}
           variant="default"
           size="lg"
           onClick={handleTogglePlay}
@@ -57,6 +58,14 @@ const Controls: FC<Props> = ({ onPlay, onPause, onStop }) => {
               <span>START</span>
             </>
           )}
+        </Button>
+        <Button
+          className={cn(css.button, css.setting)}
+          variant="outline"
+          size="lg"
+          aria-label="Setting"
+        >
+          <SettingIcon />
         </Button>
       </div>
     </div>
