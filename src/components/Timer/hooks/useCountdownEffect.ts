@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useTimerController } from "../providers";
-import type { TimeSequence } from '../providers';
+import type { TimerSequence } from '../types';
 
-const useCountdownEffect = (sequence: TimeSequence, callback: (elapsed: number, progress: number) => void) => {
+const useCountdownEffect = (sequence: TimerSequence, callback: (elapsed: number, progress: number) => void) => {
   const { paused, stopped } = useTimerController();
   const frameIdRef = useRef(0);
   const pastTimeRef = useRef(0);

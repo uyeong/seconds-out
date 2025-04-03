@@ -12,7 +12,6 @@ const SequenceInfo = () => {
   const { sequence, current } = useTimerSequence();
   const rootRef = useRef<HTMLUListElement>(null);
   const activeItemRef = useRef<HTMLLIElement>(null);
-  // 활성 항목을 컨테이너 중앙에 배치하는 네이티브 방식
   useEffect(() => {
     if (rootRef.current && activeItemRef.current) {
       const container = rootRef.current;
@@ -30,10 +29,7 @@ const SequenceInfo = () => {
       });
     }
   }, [current, mounted]);
-
-  // 현재 활성화된 아이템의 인덱스 찾기
   const activeIndex = sequence.findIndex(item => item === current);
-
   return (
     <ul className={cn(css.root, { [css.mounted]: mounted })} ref={rootRef}>
       {sequence.map((item, index) => {
@@ -55,7 +51,7 @@ const SequenceInfo = () => {
             ref={item === current ? activeItemRef : undefined}
           >
             <span className={css.sequenceType}>
-              {item.type === 'round' ? `ROUND ${item.round}` : item.type.toUpperCase()}
+              {item.name}
             </span>
           </li>
         );

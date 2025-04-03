@@ -26,17 +26,17 @@
 }
 
 .progress {
-  stroke: var(--ring);
+  stroke: rgb(from var(--primary) r g b / 0.2);
 
   &.setup {
     stroke: var(--chart-2)
   }
 
   &.round {
-    stroke: var(--chart-5);
+    stroke: var(--chart-3);
   }
 
   &.rest {
-    stroke: var(--chart-2);
+    stroke: var(--chart-1);
   }
 }

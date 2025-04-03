@@ -1,29 +1,22 @@
-import { createContext, useContext, useRef, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 import { useEventCallback } from '~/hooks';
+import { TimerSequence } from '../types';
 
 import type { FC, PropsWithChildren } from 'react';
-
-interface TimeSequence {
-  type: 'setup' | 'round' | 'rest';
-  round?: number;
-  duration: number;
-}
+import { useTimerConfig } from './TimerConfigProvider';
 
 interface Context {
-  sequence: TimeSequence[];
-  current: TimeSequence;
+  sequence: TimerSequence[];
+  current: TimerSequence;
   next: () => void;
   reset: () => void;
   hasNext: () => boolean;
 }
 
-interface Props extends PropsWithChildren {
-  sequence: TimeSequence[];
-}
-
 const TimerSequenceContext = createContext<Context | undefined>(undefined);
-const TimerSequenceProvider: FC<Props> = ({ sequence, children }) => {
+const TimerSequenceProvider: FC<PropsWithChildren> = ({ children }) => {
+  const { sequence } = useTimerConfig();
   const [currentSeqIndex, setCurrentSeqIndex] = useState(0);
   const next = useEventCallback(() => {
     setCurrentSeqIndex(prev => Math.min(prev + 1, sequence.length));
@@ -57,4 +50,4 @@ const useTimerSequence = () => {
 
 export default TimerSequenceProvider;
 export { TimerSequenceContext, useTimerSequence };
-export type { Context, TimeSequence };
+export type { Context };

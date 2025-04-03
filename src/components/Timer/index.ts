@@ -1,4 +1,13 @@
 export { default } from './Timer';
-export { TimerSequenceProvider, TimerControllerProvider, useTimerSequence, useTimerController } from './providers';
-export type { Props } from './Timer';
-export type { TimeSequence } from './providers'
+export { 
+  TimerSequenceProvider, 
+  TimerControllerProvider, 
+  TimerConfigProvider,
+  useTimerSequence, 
+  useTimerController,
+  useTimerConfig
+} from './providers';
+
+export { createTimerSequence, formatTime } from './utils';
+
+export type { TimerConfig, TimerSequence } from './types';
