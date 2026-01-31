@@ -120,6 +120,13 @@ const Setting: FC<Props> = ({ config: targetConfig, open, onClose }) => {
       volume: value[0] / 100,
     }));
   });
+  const handleBoostChange = useEventCallback((value: number[]) => {
+    // 슬라이더 값 100-300을 1.0-3.0으로 변환
+    setFormState((prev: TimerConfig) => ({
+      ...prev,
+      boost: value[0] / 100,
+    }));
+  });
   // 최종 제출 전 유효성 검사
   const validateForm = (): boolean => {
     // 라운드 수 검사
@@ -266,6 +273,21 @@ const Setting: FC<Props> = ({ config: targetConfig, open, onClose }) => {
               min={0}
               step={1}
               onValueChange={handleVolumeChange}
+            />
+          </div>
+          <div className={css.item}>
+            <Label className={css.label}>
+              Boost
+              <span className={css.boostValue}>
+                {(formState.boost ?? 1).toFixed(1)}x
+              </span>
+            </Label>
+            <Slider
+              value={[Math.round((formState.boost ?? 1) * 100)]}
+              max={300}
+              min={100}
+              step={10}
+              onValueChange={handleBoostChange}
             />
           </div>
         </div>

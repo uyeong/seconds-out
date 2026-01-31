@@ -22,6 +22,7 @@ const defaultConfigs: TimerConfig[] = [
     theme: 'base',
     bell: 'digital',
     volume: 0.5,
+    boost: 1,
     durations: {
       setupSeconds: 10,
       restSeconds: 60,

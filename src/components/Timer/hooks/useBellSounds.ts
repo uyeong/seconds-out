@@ -1,4 +1,4 @@
-import { Howl } from 'howler';
+import { Howl, Howler } from 'howler';
 
 import { useEventCallback } from '~/hooks';
 
@@ -6,6 +6,15 @@ import bells from '../bells';
 
 import type { TimerSequence, BellName } from '../types';
 import type { HowlOptions } from 'howler';
+
+// Howler masterGain을 통한 증폭 설정
+const setMasterBoost = (boost: number) => {
+  // Howler.masterGain은 Web Audio API GainNode
+  // gain.value를 1 이상으로 설정하면 증폭됨
+  if (Howler.masterGain) {
+    Howler.masterGain.gain.value = boost;
+  }
+};
 
 class BellSound {
   private sound: Howl;
@@ -22,9 +31,14 @@ class BellSound {
     this.sound.on('end', () => (this.state = 'stopped'));
   }
 
-  public play(volume?: number) {
+  public play(volume?: number, boost?: number) {
+    // 기본 볼륨 설정 (0-1 범위)
     if (volume !== undefined) {
-      this.sound.volume(volume);
+      this.sound.volume(Math.min(volume, 1));
+    }
+    // masterGain을 통한 증폭
+    if (boost !== undefined) {
+      setMasterBoost(boost);
     }
     this.sound.play();
   }
@@ -67,7 +81,11 @@ const bellSounds = bells.map((bell) => ({
     : null,
 }));
 
-const useBellSounds = (bellName: BellName, volume: number) => {
+const useBellSounds = (
+  bellName: BellName,
+  volume: number,
+  boost: number = 1,
+) => {
   const bell = bellSounds.find(({ name }) => name === bellName);
   const bellSoundPair = bell ? bell.sounds : null;
   const getBySequence = useEventCallback((sequence: TimerSequence) => {
@@ -106,7 +124,7 @@ const useBellSounds = (bellName: BellName, volume: number) => {
   const resumePaused = useEventCallback(() => {
     const pausedSound = getByState('paused');
     if (pausedSound) {
-      pausedSound.play(volume);
+      pausedSound.play(volume, boost);
       return true;
     }
     return false;
@@ -143,7 +161,7 @@ const useBellSounds = (bellName: BellName, volume: number) => {
       ) {
         return;
       }
-      sound.play(volume);
+      sound.play(volume, boost);
     },
   );
   return {

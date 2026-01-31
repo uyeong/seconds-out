@@ -32,7 +32,7 @@ const Timer: FC<Props> = ({ config, active = false }) => {
     useTimerSequence(config);
   const { stopped, paused, playing, play, pause, stop } = useTimerController();
   const { resumePaused, pausePlaying, stopSounds, playOnTiming } =
-    useBellSounds(config.bell, config.volume ?? 0.5);
+    useBellSounds(config.bell, config.volume ?? 0.5, config.boost ?? 1);
   const [currentSeconds, setCurrentSeconds] = useState(0);
   const [settingOpen, setSettingOpen] = useState(false);
   const gaugeRef = useRef<SVGCircleElement>(null);
