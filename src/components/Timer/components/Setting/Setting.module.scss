@@ -1,7 +1,46 @@
+.formWrapper {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  max-height: calc(100vh - 280px); // 헤더, 푸터, 여백 공간 확보
+}
+
 .setting {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE, Edge
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari
+  }
+}
+
+.scrollGradient {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 1;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  &.top {
+    top: 0;
+    background: linear-gradient(to top, transparent, var(--background));
+  }
+
+  &.bottom {
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent, var(--background));
+  }
 }
 
 .item {
@@ -15,6 +54,7 @@
   font-weight: 500;
   padding-top: 2px;
 }
+
 .boostValue {
   font-weight: normal;
   font-size: 0.75rem;

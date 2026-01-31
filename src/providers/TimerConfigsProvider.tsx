@@ -19,6 +19,7 @@ interface Context {
 
 const defaultConfigs: TimerConfig[] = [
   {
+    name: 'Timer 1',
     theme: 'base',
     bell: 'digital',
     volume: 0.5,

@@ -123,6 +123,11 @@ const Timer: FC<Props> = ({ config, active = false }) => {
         } as CSSProperties
       }
     >
+      {config.name && (
+        <div className={css.name}>
+          <span>{config.name}</span>
+        </div>
+      )}
       <div className={css.inside}>
         <Meter
           gaugeRef={gaugeRef}

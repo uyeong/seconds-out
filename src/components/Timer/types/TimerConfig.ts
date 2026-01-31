@@ -16,6 +16,7 @@ type ThemeName =
 type BellName = 'none' | 'classic' | 'digital';
 
 interface TimerConfig {
+  name: string; // 타이머 별칭
   theme: ThemeName;
   bell: BellName;
   volume: number;

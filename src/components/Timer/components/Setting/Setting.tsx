@@ -1,5 +1,5 @@
 import { PlusCircle, Check, Trash2 } from 'lucide-react';
-import { memo, useState, useEffect } from 'react';
+import { memo, useState, useEffect, useRef } from 'react';
 
 import { Button } from '~/components/ui/button';
 import {
@@ -47,6 +47,9 @@ const Setting: FC<Props> = ({ config: targetConfig, open, onClose }) => {
   const [roundsInput, setRoundsInput] = useState<string>(
     targetConfig.rounds.count.toString(),
   );
+  const formRef = useRef<HTMLDivElement>(null);
+  const topGradientRef = useRef<HTMLDivElement>(null);
+  const bottomGradientRef = useRef<HTMLDivElement>(null);
   const isRemoveDisabled = configs.length <= 1;
   const targetConfigIndex = configs.indexOf(targetConfig);
   const selectedTheme = themes.find((theme) => theme.name === formState.theme);
@@ -60,6 +63,28 @@ const Setting: FC<Props> = ({ config: targetConfig, open, onClose }) => {
       resetForm();
     }
   }, [open, targetConfig, resetForm]);
+  // 스크롤 위치에 따른 그라데이션 표시 (직접 DOM 조작으로 리렌더링 방지)
+  const checkScrollGradient = useEventCallback(() => {
+    const el = formRef.current;
+    if (!el) return;
+    const hasMoreContent = el.scrollHeight > el.clientHeight;
+    const isAtTop = el.scrollTop <= 10;
+    const isAtBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 10;
+    topGradientRef.current?.classList.toggle(
+      css.visible,
+      hasMoreContent && !isAtTop,
+    );
+    bottomGradientRef.current?.classList.toggle(
+      css.visible,
+      hasMoreContent && !isAtBottom,
+    );
+  });
+  useEffect(() => {
+    if (open) {
+      // 모달 열릴 때 스크롤 상태 체크
+      setTimeout(checkScrollGradient, 100);
+    }
+  }, [open, checkScrollGradient]);
   const handleDialogClose = useEventCallback(() => {
     resetForm();
     onClose?.();
@@ -127,6 +152,14 @@ const Setting: FC<Props> = ({ config: targetConfig, open, onClose }) => {
       boost: value[0] / 100,
     }));
   });
+  const handleNameChange = useEventCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setFormState((prev: TimerConfig) => ({
+        ...prev,
+        name: event.target.value,
+      }));
+    },
+  );
   // 최종 제출 전 유효성 검사
   const validateForm = (): boolean => {
     // 라운드 수 검사
@@ -173,123 +206,156 @@ const Setting: FC<Props> = ({ config: targetConfig, open, onClose }) => {
         <DialogHeader>
           <DialogTitle>Timer Settings</DialogTitle>
         </DialogHeader>
-        <div className={css.setting}>
-          <div className={css.item}>
-            <Label htmlFor="setup" className={css.label}>
-              Setup Time
-            </Label>
-            <DurationPicker
-              value={formState.durations.setupSeconds}
-              onChange={handleChangeSetupSeconds}
-            />
-          </div>
-          <div className={css.item}>
-            <Label htmlFor="round" className={css.label}>
-              Round Time
-            </Label>
-            <DurationPicker
-              value={formState.durations.roundSeconds}
-              onChange={handleChangeRoundSeconds}
-            />
-          </div>
-          <div className={css.item}>
-            <Label htmlFor="rest" className={css.label}>
-              Rest Time
-            </Label>
-            <DurationPicker
-              value={formState.durations.restSeconds}
-              onChange={handleChangeRestSeconds}
-            />
-          </div>
-          <div className={css.item}>
-            <Label htmlFor="roundCount" className={css.label}>
-              Rounds
-            </Label>
-            <Input
-              className={css.numberInput}
-              id="roundCount"
-              type="number"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              min="1"
-              max="99"
-              value={roundsInput}
-              onChange={handleRoundsChange}
-            />
-          </div>
-          <div className={css.item}>
-            <Label htmlFor="theme" className={css.label}>
-              Theme
-            </Label>
-            <div className="w-full">
-              <Select value={formState.theme} onValueChange={handleThemeChange}>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a theme" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Themes</SelectLabel>
-                    {themes.map((theme) => (
-                      <SelectItem key={theme.name} value={theme.name}>
-                        {theme.name.charAt(0).toUpperCase() +
-                          theme.name.slice(1)}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              {selectedThemeDescription && (
-                <span className={css.description}>
-                  {selectedThemeDescription}
+        <div className={css.formWrapper}>
+          <div
+            ref={topGradientRef}
+            className={cn(css.scrollGradient, css.top)}
+          />
+          <div
+            ref={formRef}
+            className={css.setting}
+            onScroll={checkScrollGradient}
+          >
+            <div className={css.item}>
+              <Label htmlFor="name" className={css.label}>
+                Name
+              </Label>
+              <Input
+                id="name"
+                type="text"
+                placeholder="Timer name"
+                maxLength={20}
+                value={formState.name ?? ''}
+                onChange={handleNameChange}
+              />
+            </div>
+            <div className={css.item}>
+              <Label htmlFor="setup" className={css.label}>
+                Setup Time
+              </Label>
+              <DurationPicker
+                value={formState.durations.setupSeconds}
+                onChange={handleChangeSetupSeconds}
+              />
+            </div>
+            <div className={css.item}>
+              <Label htmlFor="round" className={css.label}>
+                Round Time
+              </Label>
+              <DurationPicker
+                value={formState.durations.roundSeconds}
+                onChange={handleChangeRoundSeconds}
+              />
+            </div>
+            <div className={css.item}>
+              <Label htmlFor="rest" className={css.label}>
+                Rest Time
+              </Label>
+              <DurationPicker
+                value={formState.durations.restSeconds}
+                onChange={handleChangeRestSeconds}
+              />
+            </div>
+            <div className={css.item}>
+              <Label htmlFor="roundCount" className={css.label}>
+                Rounds
+              </Label>
+              <Input
+                className={css.numberInput}
+                id="roundCount"
+                type="number"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                min="1"
+                max="99"
+                value={roundsInput}
+                onChange={handleRoundsChange}
+              />
+            </div>
+            <div className={css.item}>
+              <Label htmlFor="theme" className={css.label}>
+                Theme
+              </Label>
+              <div className="w-full">
+                <Select
+                  value={formState.theme}
+                  onValueChange={handleThemeChange}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select a theme" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Themes</SelectLabel>
+                      {themes.map((theme) => (
+                        <SelectItem key={theme.name} value={theme.name}>
+                          {theme.name.charAt(0).toUpperCase() +
+                            theme.name.slice(1)}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                {selectedThemeDescription && (
+                  <span className={css.description}>
+                    {selectedThemeDescription}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className={css.item}>
+              <Label className={css.label}>Sound</Label>
+              <RadioGroup
+                value={formState.bell}
+                onValueChange={handleBellChange}
+                className={css.radioGroup}
+              >
+                {bells.map((bell) => (
+                  <div key={bell.name} className={css.radioItem}>
+                    <RadioGroupItem
+                      value={bell.name}
+                      id={`sound-${bell.name}`}
+                    />
+                    <Label
+                      htmlFor={`sound-${bell.name}`}
+                      className={css.smallText}
+                    >
+                      {bell.name.charAt(0).toUpperCase() + bell.name.slice(1)}
+                    </Label>
+                  </div>
+                ))}
+              </RadioGroup>
+            </div>
+            <div className={css.item}>
+              <Label className={css.label}>Volume</Label>
+              <Slider
+                value={[Math.round(formState.volume * 100) || 50]}
+                max={100}
+                min={0}
+                step={1}
+                onValueChange={handleVolumeChange}
+              />
+            </div>
+            <div className={css.item}>
+              <Label className={css.label}>
+                Boost
+                <span className={css.boostValue}>
+                  {(formState.boost ?? 1).toFixed(1)}x
                 </span>
-              )}
+              </Label>
+              <Slider
+                value={[Math.round((formState.boost ?? 1) * 100)]}
+                max={300}
+                min={100}
+                step={10}
+                onValueChange={handleBoostChange}
+              />
             </div>
           </div>
-          <div className={css.item}>
-            <Label className={css.label}>Sound</Label>
-            <RadioGroup
-              value={formState.bell}
-              onValueChange={handleBellChange}
-              className={css.radioGroup}
-            >
-              {bells.map((bell) => (
-                <div key={bell.name} className={css.radioItem}>
-                  <RadioGroupItem value={bell.name} id={`sound-${bell.name}`} />
-                  <Label
-                    htmlFor={`sound-${bell.name}`}
-                    className={css.smallText}
-                  >
-                    {bell.name.charAt(0).toUpperCase() + bell.name.slice(1)}
-                  </Label>
-                </div>
-              ))}
-            </RadioGroup>
-          </div>
-          <div className={css.item}>
-            <Label className={css.label}>Volume</Label>
-            <Slider
-              value={[Math.round(formState.volume * 100) || 50]}
-              max={100}
-              min={0}
-              step={1}
-              onValueChange={handleVolumeChange}
-            />
-          </div>
-          <div className={css.item}>
-            <Label className={css.label}>
-              Boost
-              <span className={css.boostValue}>
-                {(formState.boost ?? 1).toFixed(1)}x
-              </span>
-            </Label>
-            <Slider
-              value={[Math.round((formState.boost ?? 1) * 100)]}
-              max={300}
-              min={100}
-              step={10}
-              onValueChange={handleBoostChange}
-            />
-          </div>
+          <div
+            ref={bottomGradientRef}
+            className={cn(css.scrollGradient, css.bottom)}
+          />
         </div>
         <DialogFooter className={css.footer}>
           <div className={css.buttonGroup}>
