@@ -38,3 +38,9 @@
     height: 1.5rem;
   }
 }
+
+@media (orientation: landscape) {
+  .inside {
+    padding-bottom: 0;
+  }
+}

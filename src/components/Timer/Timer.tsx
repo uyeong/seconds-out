@@ -129,20 +129,24 @@ const Timer: FC<Props> = ({ config, active = false }) => {
         </div>
       )}
       <div className={css.inside}>
-        <Meter
-          gaugeRef={gaugeRef}
-          sequence={sequence}
-          current={current}
-          seconds={currentSeconds}
-        />
-        <SequenceInfo sequence={sequence} current={current} />
-        <Controls
-          playing={playing}
-          onPlay={handleClickPlay}
-          onPause={handleClickPause}
-          onStop={handleClickStop}
-          onSetting={handleClickOpenSetting}
-        />
+        <div className={css.left}>
+          <Meter
+            gaugeRef={gaugeRef}
+            sequence={sequence}
+            current={current}
+            seconds={currentSeconds}
+          />
+        </div>
+        <div className={css.right}>
+          <SequenceInfo sequence={sequence} current={current} />
+          <Controls
+            playing={playing}
+            onPlay={handleClickPlay}
+            onPause={handleClickPause}
+            onStop={handleClickStop}
+            onSetting={handleClickOpenSetting}
+          />
+        </div>
         <Setting
           open={settingOpen}
           config={config}

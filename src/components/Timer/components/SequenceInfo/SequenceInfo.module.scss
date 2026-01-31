@@ -99,3 +99,9 @@
       opacity 0.5s ease 0.2s;
   }
 }
+
+@media (orientation: landscape) {
+  .root {
+    flex: 1;
+  }
+}
