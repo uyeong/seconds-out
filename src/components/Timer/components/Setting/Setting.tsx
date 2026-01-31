@@ -345,7 +345,7 @@ const Setting: FC<Props> = ({ config: targetConfig, open, onClose }) => {
               </Label>
               <Slider
                 value={[Math.round((formState.boost ?? 1) * 100)]}
-                max={300}
+                max={500}
                 min={100}
                 step={10}
                 onValueChange={handleBoostChange}
