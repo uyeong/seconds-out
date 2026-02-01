@@ -34,6 +34,34 @@ const bells = [
       },
     ],
   },
+  {
+    name: 'beep',
+    description: 'Melodic beep sound',
+    sounds: [
+      {
+        src: `${BASE_URL}bells/beep_start.mp3`,
+        offsetSeconds: 4,
+      },
+      {
+        src: `${BASE_URL}bells/beep_end.mp3`,
+        offsetSeconds: 0,
+      },
+    ],
+  },
+  {
+    name: 'airhorn',
+    description: 'Air horn sound',
+    sounds: [
+      {
+        src: `${BASE_URL}bells/airhorn_start.wav`,
+        offsetSeconds: 3,
+      },
+      {
+        src: `${BASE_URL}bells/airhorn_end.mp3`,
+        offsetSeconds: 0,
+      },
+    ],
+  }
 ];
 
 export default bells;
