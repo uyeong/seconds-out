@@ -22,3 +22,30 @@
     overflow: hidden;
   }
 }
+
+/* 삭제 시 패널이 접히며 닫히는 애니메이션 */
+.removing {
+  animation: collapse .45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  scroll-snap-align: none;
+  pointer-events: none;
+
+  /* 내부 콘텐츠 너비 고정 (리플로우 방지) */
+  & > * {
+    width: 100vw;
+    min-width: 100vw;
+  }
+}
+
+@keyframes collapse {
+  0% {
+    flex-basis: 100%;
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    flex-basis: 0;
+    min-width: 0;
+    opacity: .5;
+    transform: scale(.8);
+  }
+}

@@ -25,9 +25,10 @@ const CIRCUMFERENCE = 2 * Math.PI * 47;
 interface Props {
   config: TimerConfig;
   active?: boolean;
+  onRemove?: () => void;
 }
 
-const Timer: FC<Props> = ({ config, active = false }) => {
+const Timer: FC<Props> = ({ config, active = false, onRemove }) => {
   const { sequence, currentSeqIndex, next, reset, hasNext } =
     useTimerSequence(config);
   const { stopped, paused, playing, play, pause, stop } = useTimerController();
@@ -73,6 +74,17 @@ const Timer: FC<Props> = ({ config, active = false }) => {
       settingPaused.current = false;
     }
   });
+  // 재생 중 화면 꺼짐 방지 (Wake Lock API)
+  useEffect(() => {
+    if (!active || !playing) return;
+    let wakeLock: WakeLockSentinel | null = null;
+    navigator.wakeLock?.request('screen').then((lock) => {
+      wakeLock = lock;
+    });
+    return () => {
+      wakeLock?.release();
+    };
+  }, [active, playing]);
   useEffect(() => {
     if (active) {
       setThemeColor(theme.bgColor);
@@ -157,6 +169,7 @@ const Timer: FC<Props> = ({ config, active = false }) => {
           open={settingOpen}
           config={config}
           onClose={handleClickCloseSetting}
+          onRemove={onRemove}
         />
       </div>
     </div>

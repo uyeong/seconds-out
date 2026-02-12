@@ -39,10 +39,16 @@ interface Props {
   config: TimerConfig;
   open: boolean;
   onClose?: () => void;
+  onRemove?: () => void;
 }
 
-const Setting: FC<Props> = ({ config: targetConfig, open, onClose }) => {
-  const { configs, setSelectedIndex, update, add, remove } = useTimerConfigs();
+const Setting: FC<Props> = ({
+  config: targetConfig,
+  open,
+  onClose,
+  onRemove,
+}) => {
+  const { configs, setSelectedIndex, update, add } = useTimerConfigs();
   const [formState, setFormState] = useState<TimerConfig>({ ...targetConfig });
   const [roundsInput, setRoundsInput] = useState<string>(
     targetConfig.rounds.count.toString(),
@@ -186,6 +192,7 @@ const Setting: FC<Props> = ({ config: targetConfig, open, onClose }) => {
   });
   const handleSaveNew = useEventCallback(() => {
     if (!validateForm()) return;
+    if (!window.confirm('Create a new timer with the current settings?')) return;
 
     add(formState);
     setSelectedIndex(configs.length);
@@ -196,8 +203,8 @@ const Setting: FC<Props> = ({ config: targetConfig, open, onClose }) => {
       return;
     }
     if (window.confirm('Do you want to delete this timer setting?')) {
-      remove(targetConfigIndex);
       onClose?.();
+      onRemove?.();
     }
   });
   return (
