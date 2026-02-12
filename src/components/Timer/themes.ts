@@ -213,6 +213,7 @@ const themes = [
     name: 'yadon',
     description: 'Relaxed pink warmth with cool gray accent',
     bgColor: '#F9E8EA',
+    bgPattern: 'yadon.svg',
     textColor: '#5A3D42',
     button: {
       bgColor: '#E88790',

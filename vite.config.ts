@@ -22,6 +22,7 @@ export default defineConfig({
         'icons/ios/*.png',
         'icons/android/*.png',
         'bells/*.wav',
+        'patterns/*.svg',
       ],
       strategies: 'generateSW',
       workbox: {

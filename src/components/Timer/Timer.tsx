@@ -114,6 +114,10 @@ const Timer: FC<Props> = ({ config, active = false }) => {
       style={
         {
           '--background': theme.bgColor,
+          '--bg-pattern':
+            'bgPattern' in theme && theme.bgPattern
+              ? `url(${import.meta.env.BASE_URL}patterns/${theme.bgPattern})`
+              : 'none',
           '--text-color': theme.textColor,
           '--chart-setup': theme.chart.setup,
           '--chart-rest': theme.chart.rest,

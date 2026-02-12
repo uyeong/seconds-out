@@ -5,34 +5,13 @@
   height: var(--height);
   container-type: size;
 
-  &::before,
-  &::after {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: calc(50% - 2rem);
-    content: '';
-  }
-
-  &::before {
-    top: 0;
-    z-index: 1;
-    background: linear-gradient(
-      to top,
-      rgb(from var(--background) r g b / 0%) 0%,
-      rgb(from var(--background) r g b / 100%) 80%,
-      rgb(from var(--background) r g b / 100%) 100%
-    );
-  }
-
-  &::after {
-    bottom: 0;
-    background: linear-gradient(
-      to bottom,
-      rgb(from var(--background) r g b / 0%) 0%,
-      rgb(from var(--background) r g b / 100%) 80%
-    );
-  }
+  mask-image: linear-gradient(
+    to bottom,
+    transparent calc(10% - 0.4rem),
+    black calc(50% - 2rem),
+    black calc(50% + 2rem),
+    transparent calc(90% + 0.4rem)
+  );
 }
 
 .inside {

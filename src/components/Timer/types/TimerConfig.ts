@@ -12,7 +12,8 @@ type ThemeName =
   | 'mellow'
   | 'noctis'
   | 'beast'
-  | 'boxer';
+  | 'boxer'
+  | 'yadon';
 type BellName = 'none' | 'classic' | 'digital';
 
 interface TimerConfig {

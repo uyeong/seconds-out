@@ -2,6 +2,8 @@
   height: 100vh;
   height: 100dvh;
   background-color: var(--background);
+  background-image: var(--bg-pattern);
+  background-repeat: repeat;
   box-sizing: border-box;
   color: var(--text-color);
   position: relative;
