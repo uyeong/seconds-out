@@ -1,6 +1,5 @@
 .root {
-  height: 100vh;
-  height: 100dvh;
+  height: 100%;
   padding-top: env(safe-area-inset-top, 0px);
   background-color: var(--background);
   box-sizing: border-box;
