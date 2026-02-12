@@ -1,8 +1,7 @@
 .root {
-  height: 100%;
-  padding-top: env(safe-area-inset-top, 0px);
+  height: 100vh;
+  height: 100dvh;
   background-color: var(--background);
-  box-sizing: border-box;
   color: var(--text-color);
   position: relative;
 
@@ -26,7 +25,7 @@
   top: 0;
   left: 0;
   right: 0;
-  padding-top: calc(env(safe-area-inset-top, 0px) + 0.75rem);
+  padding-top: 0.75rem;
   text-align: center;
   z-index: 2;
 
