@@ -366,7 +366,7 @@ const Setting: FC<Props> = ({ config: targetConfig, open, onClose }) => {
               onClick={handleSaveNew}
             >
               <PlusCircle />
-              Save New
+              Save As New
             </Button>
             <Button
               className={cn(css.button, css.apply)}
