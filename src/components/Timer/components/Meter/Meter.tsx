@@ -21,6 +21,7 @@ const Meter: FC<Props> = ({ gaugeRef, sequence, current, seconds }) => {
   return (
     <div className={css.root}>
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="44" fill="var(--background)" />
         <g
           fill="none"
           strokeWidth={6}

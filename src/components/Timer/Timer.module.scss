@@ -14,6 +14,8 @@
     background-size: var(--bg-pattern-size, auto);
     opacity: var(--bg-pattern-opacity, 0);
     pointer-events: none;
+    mask-image: linear-gradient(to bottom, transparent, black 50%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 50%);
   }
   transition:
     opacity 0.3s,
