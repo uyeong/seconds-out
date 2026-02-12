@@ -13,6 +13,7 @@ type ThemeName =
   | 'noctis'
   | 'beast'
   | 'boxer'
+  | 'ring'
   | 'yadon';
 type BellName = 'none' | 'classic' | 'digital';
 

@@ -3,6 +3,8 @@ const themes = [
     name: 'base',
     description: 'Clean and neutral basic theme',
     bgColor: '#F5F5F5',
+    bgPattern: 'base.svg',
+    bgPatternOpacity: 1,
     textColor: '#212121',
     button: {
       bgColor: '#757575',
@@ -18,6 +20,8 @@ const themes = [
     name: 'dark',
     description: 'Dark mode theme for reduced eye strain',
     bgColor: '#121212',
+    bgPattern: 'dark.svg',
+    bgPatternOpacity: 1,
     textColor: '#E0E0E0',
     button: {
       bgColor: '#A0A0A0',
@@ -33,6 +37,8 @@ const themes = [
     name: 'linen',
     description: 'Natural olive green mix',
     bgColor: '#F5F5F5',
+    bgPattern: 'linen.svg',
+    bgPatternOpacity: 1,
     textColor: '#212121',
     button: {
       bgColor: '#5C6F68',
@@ -48,6 +54,8 @@ const themes = [
     name: 'leaflight',
     description: 'Refreshing lime green atmosphere',
     bgColor: '#F1F8E9',
+    bgPattern: 'leaflight.svg',
+    bgPatternOpacity: 1,
     textColor: '#2E3B2C',
     button: {
       bgColor: '#8BC34A',
@@ -63,6 +71,8 @@ const themes = [
     name: 'umber',
     description: 'Deep purple with premium feel',
     bgColor: '#1C1C1E',
+    bgPattern: 'umber.svg',
+    bgPatternOpacity: 1,
     textColor: '#D6D6D6',
     button: {
       bgColor: '#5E35B1',
@@ -78,6 +88,8 @@ const themes = [
     name: 'metro',
     description: 'Midnight blue with modern aesthetic',
     bgColor: '#0D1B2A',
+    bgPattern: 'metro.svg',
+    bgPatternOpacity: 1,
     textColor: '#E0F2F1',
     button: {
       bgColor: '#00ACC1',
@@ -93,6 +105,8 @@ const themes = [
     name: 'azure',
     description: 'Refreshing sky blue summer vibe',
     bgColor: '#E0F7FA',
+    bgPattern: 'azure.svg',
+    bgPatternOpacity: 1,
     textColor: '#004D40',
     button: {
       bgColor: '#26A69A',
@@ -108,6 +122,8 @@ const themes = [
     name: 'brasa',
     description: 'Passionate orange-red energy',
     bgColor: '#BF360C',
+    bgPattern: 'brasa.svg',
+    bgPatternOpacity: 1,
     textColor: '#FFF3E0',
     button: {
       bgColor: '#FFCCBC',
@@ -123,6 +139,8 @@ const themes = [
     name: 'vanta',
     description: 'Minimal black & white contrast',
     bgColor: '#121212',
+    bgPattern: 'vanta.svg',
+    bgPatternOpacity: 1,
     textColor: '#E0E0E0',
     button: {
       bgColor: '#FAFAFA',
@@ -138,6 +156,8 @@ const themes = [
     name: 'lucid',
     description: 'Cool blue-gray clear focus',
     bgColor: '#ECEFF1',
+    bgPattern: 'lucid.svg',
+    bgPatternOpacity: 1,
     textColor: '#263238',
     chart: {
       setup: '#607D8B',
@@ -153,6 +173,8 @@ const themes = [
     name: 'mellow',
     description: 'Warm yellow sunshine energy',
     bgColor: '#FFFDE7',
+    bgPattern: 'mellow.svg',
+    bgPatternOpacity: 1,
     textColor: '#5D4037',
     chart: {
       setup: '#FFCA28',
@@ -168,6 +190,8 @@ const themes = [
     name: 'noctis',
     description: 'Mysterious purple cosmic atmosphere',
     bgColor: '#1A1446',
+    bgPattern: 'noctis.svg',
+    bgPatternOpacity: 1,
     textColor: '#D1C4E9',
     chart: {
       setup: '#7E57C2',
@@ -183,6 +207,8 @@ const themes = [
     name: 'beast',
     description: 'Powerful black & red contrast',
     bgColor: '#1B1B1B',
+    bgPattern: 'beast.svg',
+    bgPatternOpacity: 1,
     textColor: '#FAFAFA',
     button: {
       bgColor: '#D32F2F',
@@ -198,6 +224,8 @@ const themes = [
     name: 'boxer',
     description: 'Ringside dark blue & red atmosphere',
     bgColor: '#121721',
+    bgPattern: 'boxer.svg',
+    bgPatternOpacity: 1,
     textColor: '#ECEFF1',
     button: {
       bgColor: '#546E7A',
@@ -210,10 +238,28 @@ const themes = [
     },
   },
   {
+    name: 'ring',
+    description: 'Playful boxing doodle pattern',
+    bgColor: '#F5F7FA',
+    bgPattern: 'boxing.jpg',
+    bgPatternOpacity: 0.2,
+    textColor: '#2C3E50',
+    button: {
+      bgColor: '#00ACC1',
+      textColor: '#FFFFFF',
+    },
+    chart: {
+      setup: '#66BB6A',
+      round: '#EC407A',
+      rest: '#42A5F5',
+    },
+  },
+  {
     name: 'yadon',
     description: 'Relaxed pink warmth with cool gray accent',
     bgColor: '#F9E8EA',
     bgPattern: 'yadon.svg',
+    bgPatternOpacity: 1,
     textColor: '#5A3D42',
     button: {
       bgColor: '#E88790',
