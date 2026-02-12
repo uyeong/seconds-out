@@ -132,6 +132,8 @@ const Timer: FC<Props> = ({ config, active = false, onRemove }) => {
               : 'none',
           '--bg-pattern-opacity':
             'bgPatternOpacity' in theme ? theme.bgPatternOpacity : 0,
+          '--bg-pattern-size':
+            'bgPatternSize' in theme ? theme.bgPatternSize : 'auto',
           '--text-color': theme.textColor,
           '--chart-setup': theme.chart.setup,
           '--chart-rest': theme.chart.rest,

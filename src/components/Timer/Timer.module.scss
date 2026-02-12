@@ -13,6 +13,7 @@
     inset: 0;
     background-image: var(--bg-pattern);
     background-repeat: repeat;
+    background-size: var(--bg-pattern-size, auto);
     opacity: var(--bg-pattern-opacity, 0);
     pointer-events: none;
   }

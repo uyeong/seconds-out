@@ -242,6 +242,7 @@ const themes = [
     description: 'Playful boxing doodle pattern',
     bgColor: '#F5F7FA',
     bgPattern: 'boxing.jpg',
+    bgPatternSize: '200px 200px',
     bgPatternOpacity: 0.2,
     textColor: '#2C3E50',
     button: {

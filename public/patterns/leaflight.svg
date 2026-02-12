@@ -1,3 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-  <path d="M10 4Q14 10 10 16Q6 10 10 4z" fill="none" stroke="#2E3B2C" stroke-width="0.7" opacity="0.08"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+  <g opacity="0.07" fill="none" stroke="#2E3B2C" stroke-width="0.6" stroke-linecap="round" transform="rotate(-25 16 16)">
+    <!-- 나뭇잎 외곽 -->
+    <path d="M16 6C20 10 22 16 16 26C10 16 12 10 16 6z"/>
+    <!-- 중심 잎맥 -->
+    <line x1="16" y1="7" x2="16" y2="25"/>
+    <!-- 좌우 잎맥 -->
+    <path d="M16 12Q13 11 12 9" />
+    <path d="M16 12Q19 11 20 9" />
+    <path d="M16 17Q12.5 15.5 11 14" />
+    <path d="M16 17Q19.5 15.5 21 14" />
+    <path d="M16 21Q13.5 19.5 12.5 18" />
+    <path d="M16 21Q18.5 19.5 19.5 18" />
+  </g>
 </svg>

@@ -1,12 +1,12 @@
 .root {
+  position: fixed;
+  inset: 0;
   display: flex;
   flex-direction: row;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
-  height: 100vh;
-  height: 100dvh;
 
   /* 스크롤바 숨기기 (Chrome, Safari, Opera) */
   &::-webkit-scrollbar {
@@ -25,14 +25,16 @@
 
 /* 삭제 시 패널이 접히며 닫히는 애니메이션 */
 .removing {
-  animation: collapse .45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: collapse 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   scroll-snap-align: none;
   pointer-events: none;
+  will-change: flex-basis, opacity, transform;
 
-  /* 내부 콘텐츠 너비 고정 (리플로우 방지) */
+  /* 내부 콘텐츠 너비 고정 + 레이아웃 격리 (리플로우 차단) */
   & > * {
     width: 100vw;
     min-width: 100vw;
+    contain: strict;
   }
 }
 
@@ -45,7 +47,7 @@
   100% {
     flex-basis: 0;
     min-width: 0;
-    opacity: .5;
-    transform: scale(.8);
+    opacity: 0.5;
+    transform: scale(0.8);
   }
 }
