@@ -20,12 +20,17 @@
     scroll-snap-align: start;
     scroll-snap-stop: always; /* 스크롤이 항상 스냅포인트에서 멈추도록 설정 */
     overflow: hidden;
+    contain: strict;
   }
+}
+
+.timerWrapper {
+  backface-visibility: hidden;
 }
 
 /* 삭제 시 패널이 접히며 닫히는 애니메이션 */
 .removing {
-  animation: collapse 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: collapse 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   scroll-snap-align: none;
   pointer-events: none;
   will-change: flex-basis, opacity, transform;

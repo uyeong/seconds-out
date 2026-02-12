@@ -108,7 +108,9 @@ function App() {
       {configs.map((config, index) => (
         <div
           key={index}
-          className={cn({ [css.removing]: removingIndex === index })}
+          className={cn(css.timerWrapper, {
+            [css.removing]: removingIndex === index,
+          })}
           onAnimationEnd={handleAnimationEnd}
         >
           <Timer
