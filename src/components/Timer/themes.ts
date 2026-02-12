@@ -209,6 +209,21 @@ const themes = [
       rest: '#90A4AE',
     },
   },
+  {
+    name: 'yadon',
+    description: 'Relaxed pink warmth with cool gray accent',
+    bgColor: '#F9E8EA',
+    textColor: '#5A3D42',
+    button: {
+      bgColor: '#E88790',
+      textColor: '#FFF5F0',
+    },
+    chart: {
+      setup: '#8B8FAF',
+      round: '#D4707C',
+      rest: '#F2C4A0',
+    },
+  },
 ];
 
 export default themes;
